@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
@@ -24,19 +25,27 @@ public class BoardController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @GetMapping("/test")
-    public void test() {
-        logger.info("test");
-        String TEXTG = boardService.testConnection();
-        logger.info(TEXTG);
+    @Transactional
+    @GetMapping("/list")
+    public ResponseEntity<?> loadArticleList(
+            @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
+            @RequestParam(value = "created", required = false, defaultValue = "") String created
+    ) {
+        ResponseData data = new ResponseData();
 
-        List<Board> lists = boardService.testConnection2();
-        for (Board board : lists) {
-            logger.info(board.getTitle());
-            logger.info(board.getContent());
-        }
+        List<Board> lists = boardService.loadArticleList(keyword, created);
+//        for (Board board : lists)
+//            logger.info(board.getTitle() + " " + board.getContent());
+
+        if (!lists.isEmpty())
+            data.setData(lists);
+        else
+            data.setMsg("null");
+
+        return ResponseEntity.ok(data);
     }
 
+    @Transactional
     @PostMapping("/regist")
     public ResponseEntity<?> regist(@RequestBody Board board) {
         ResponseData data = new ResponseData();
@@ -47,6 +56,48 @@ public class BoardController {
         int res = boardService.registerNewArticle(board);
 
         logger.info(String.valueOf(res));
+        return ResponseEntity.ok(data);
+    }
+
+    @Transactional
+    @PostMapping("/modify")
+    public ResponseEntity<?> modify(@RequestBody Board board) {
+        ResponseData data = new ResponseData();
+        Timestamp t = new Timestamp(System.currentTimeMillis());
+        board.setUpdatedAt(t);
+
+        return ResponseEntity.ok(data);
+    }
+
+    @Transactional
+    @GetMapping("/find")
+    public ResponseEntity<?> findArticle(
+            @RequestParam(value = "boardId", required = false, defaultValue = "") String boardId
+    ) {
+        ResponseData data = new ResponseData();
+        Board article = boardService.loadArticleDetail(Integer.parseInt(boardId));
+
+        if (article == null)
+            data.setMsg("null");
+
+        data.setData(article);
+
+        return ResponseEntity.ok(data);
+    }
+
+    @Transactional
+    @PostMapping("remove")
+    public ResponseEntity<?> removeArticle(Board board) {
+        ResponseData data = new ResponseData();
+
+        return ResponseEntity.ok(data);
+    }
+
+    @Transactional
+    @PostMapping("/good")
+    public ResponseEntity<?> goodArticle(Board board) {
+        ResponseData data = new ResponseData();
+
         return ResponseEntity.ok(data);
     }
 }
