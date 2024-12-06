@@ -100,9 +100,10 @@ public class BoardController {
     public ResponseEntity<?> goodArticle(@RequestBody Board board) {
         ResponseData data = new ResponseData();
 
-        int idx = board.getGood();
+        int idx = board.getBoardIdx();
         int curGood = boardService.findArticleCurrentGood(idx);
         int newGood = curGood + 1;
+
         int res = boardService.countArticleGood(idx, newGood);
 
         return ResponseEntity.ok(data);
