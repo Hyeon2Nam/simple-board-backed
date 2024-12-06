@@ -6,6 +6,7 @@
     <select id="loadArticleList" resultType="Board">
         SELECT *
         from BOARD
+        WHERE is_deleted = 'n'
     </select>
 
     <insert id="registerNewArticle" parameterType="Board">
@@ -13,9 +14,34 @@
         values (#{title}, #{content}, #{memberId}, #{createdAt}, #{updatedAt})
     </insert>
 
-        <select id="loadArticleDetail" parameterType="Board">
-            SELECT *
-            FROM BOARD
-            where board_idx = #{boardId}
-        </select>
+    <select id="loadArticleDetail" parameterType="Board">
+        SELECT *
+        FROM BOARD
+        where board_idx = #{boardId} and is_deleted = 'n'
+    </select>
+
+    <update id="deleteArticle" parameterType="Integer">
+        UPDATE board
+        SET is_deleted = 'y'
+        WHERE board_idx = #{boardId} and is_deleted = 'n'
+    </update>
+
+    <update id="countArticleGood" parameterType="Integer">
+        UPDATE board
+        SET good = #{good}
+        WHERE board_idx = #{boardId} and is_deleted = 'n'
+    </update>
+
+    <select id="findArticleCreated" parameterType="String">
+        SELECT member_id
+        FROM BOARD
+        where board_idx = #{boardId} and is_deleted = 'n'
+    </select>
+
+    <select id="findArticleCurrentGood" parameterType="Integer">
+        SELECT good
+        FROM BOARD
+        where board_idx = #{boardId} and is_deleted = 'n'
+    </select>
+
 </mapper>

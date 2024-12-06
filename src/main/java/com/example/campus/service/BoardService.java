@@ -35,4 +35,20 @@ public class BoardService {
     public Board loadArticleDetail(int boardId) {
         return boardDao.loadArticleDetail(boardId);
     }
+
+    public int deleteArticle(int boardId) {
+        return boardDao.deleteArticle(boardId);
+    }
+
+    public String findArticleCreated(int boardId) {
+        return boardDao.findArticleCreated(boardId);
+    }
+
+    public int findArticleCurrentGood(int boardId) {
+        return boardDao.findArticleCurrentGood(boardId);
+    }
+
+    public int countArticleGood(int boardId, int good) {
+        return boardDao.countArticleGood(boardId, good);
+    }
 }

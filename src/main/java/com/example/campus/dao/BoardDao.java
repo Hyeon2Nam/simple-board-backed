@@ -13,4 +13,12 @@ public interface BoardDao {
     int registerNewArticle(Board board);
 
     Board loadArticleDetail(int boardId);
+
+    int deleteArticle(int boardId);
+
+    String findArticleCreated(int boardId);
+
+    int findArticleCurrentGood(int boardId);
+
+    int countArticleGood(int boardId, int good);
 }
