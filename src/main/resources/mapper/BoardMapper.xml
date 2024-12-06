@@ -4,7 +4,12 @@
 
 <mapper namespace="com.example.campus.dao.BoardDao">
     <select id="testConnection2" resultType="Board">
-        SELECT * from BOARD
+        SELECT *
+        from BOARD
     </select>
 
+    <insert id="registerNewArticle" parameterType="Board">
+        insert into BOARD (title, content, member_id, created_at, updated_at)
+        values (#{title}, #{content}, #{memberId}, #{createdAt}, #{updatedAt})
+    </insert>
 </mapper>

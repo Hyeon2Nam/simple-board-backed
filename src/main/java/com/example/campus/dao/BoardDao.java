@@ -14,4 +14,6 @@ public interface BoardDao {
     String testConnection();
 
     List<Board> testConnection2();
+
+    int registerNewArticle(Board board);
 }

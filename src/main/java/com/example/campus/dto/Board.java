@@ -7,6 +7,9 @@ import lombok.ToString;
 
 import java.sql.Timestamp;
 
+@Getter
+@Setter
+@ToString
 @Data
 public class Board {
     private int boardIdx;
@@ -17,6 +20,20 @@ public class Board {
     private Timestamp createdAt;
     private Timestamp updatedAt;
     private boolean isUpdated;
+
+    @Override
+    public String toString() {
+        return "Board{" +
+                "boardIdx=" + boardIdx +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", memberId='" + memberId + '\'' +
+                ", good=" + good +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", isUpdated=" + isUpdated +
+                '}';
+    }
 
     public int getBoardIdx() {
         return boardIdx;
@@ -74,7 +91,7 @@ public class Board {
         this.updatedAt = updatedAt;
     }
 
-    public boolean isUpdated() {
+    public boolean getIsUpdated() {
         return isUpdated;
     }
 
