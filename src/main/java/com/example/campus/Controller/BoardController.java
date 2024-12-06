@@ -86,17 +86,25 @@ public class BoardController {
     }
 
     @Transactional
-    @PostMapping("remove")
-    public ResponseEntity<?> removeArticle(Board board) {
+    @PostMapping("/remove")
+    public ResponseEntity<?> removeArticle(@RequestBody Board board) {
         ResponseData data = new ResponseData();
+
+        int res = boardService.deleteArticle(board.getBoardIdx());
 
         return ResponseEntity.ok(data);
     }
 
     @Transactional
     @PostMapping("/good")
-    public ResponseEntity<?> goodArticle(Board board) {
+    public ResponseEntity<?> goodArticle(@RequestBody Board board) {
         ResponseData data = new ResponseData();
+
+        int idx = board.getBoardIdx();
+        int curGood = boardService.findArticleCurrentGood(idx);
+        int newGood = curGood + 1;
+
+        int res = boardService.countArticleGood(idx, newGood);
 
         return ResponseEntity.ok(data);
     }
