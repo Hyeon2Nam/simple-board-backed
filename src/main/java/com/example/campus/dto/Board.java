@@ -12,90 +12,14 @@ import java.sql.Timestamp;
 @ToString
 @Data
 public class Board {
-    private int boardIdx;
-    private String title;
-    private String content;
-    private String memberId;
-    private int good;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
-    private boolean isUpdated;
 
-    @Override
-    public String toString() {
-        return "Board{" +
-                "boardIdx=" + boardIdx +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", memberId='" + memberId + '\'' +
-                ", good=" + good +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                ", isUpdated=" + isUpdated +
-                '}';
-    }
+  private int boardIdx;
+  private String title;
+  private String content;
+  private String memberId;
+  private int good;
+  private Timestamp createdAt;
+  private Timestamp updatedAt;
+  private String isUpdated;
 
-    public int getBoardIdx() {
-        return boardIdx;
-    }
-
-    public void setBoardIdx(int boardIdx) {
-        this.boardIdx = boardIdx;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getMemberId() {
-        return memberId;
-    }
-
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
-    }
-
-    public int getGood() {
-        return good;
-    }
-
-    public void setGood(int good) {
-        this.good = good;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public boolean getIsUpdated() {
-        return isUpdated;
-    }
-
-    public void setUpdated(boolean updated) {
-        isUpdated = updated;
-    }
 }

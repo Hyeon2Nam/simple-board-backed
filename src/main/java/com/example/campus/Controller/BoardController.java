@@ -55,10 +55,8 @@ public class BoardController {
 
     String isRegisterUser = memberService.findMember(board.getMemberId());
 
-//    logger.info("User : " + isCorrectUser);
-
     if (isRegisterUser == null) {
-      data.setMsg("not valid user");
+      data.setMsg("faild");
       return ResponseEntity.ok(data);
     }
 
@@ -68,7 +66,6 @@ public class BoardController {
 
     int res = boardService.registerNewArticle(board);
 
-//        logger.info(String.valueOf(res));
     return ResponseEntity.ok(data);
   }
 
@@ -76,8 +73,18 @@ public class BoardController {
   @PostMapping("/modify")
   public ResponseEntity<?> modify(@RequestBody Board board) {
     ResponseData data = new ResponseData();
+
+    String curAuthor = boardService.loadArticleAuthor(board.getBoardIdx());
+
+    if (curAuthor== null || !curAuthor.equals(board.getMemberId())) {
+      data.setMsg("faild");
+      return ResponseEntity.ok(data);
+    }
+
     Timestamp t = new Timestamp(System.currentTimeMillis());
     board.setUpdatedAt(t);
+
+    int res = boardService.modifyArticleData(board);
 
     return ResponseEntity.ok(data);
   }

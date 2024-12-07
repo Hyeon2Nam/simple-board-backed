@@ -13,42 +13,51 @@ import java.util.stream.Stream;
 @Service
 public class BoardService {
 
-    @Autowired
-    private BoardDao boardDao;
+  @Autowired
+  private BoardDao boardDao;
 
-    public List<Board> loadArticleList(String keyword, String created) {
-        List<Board> boardList = boardDao.loadArticleList();
-        List<Board> filterList = new ArrayList<>();
+  public List<Board> loadArticleList(String keyword, String created) {
+    List<Board> boardList = boardDao.loadArticleList();
+    List<Board> filterList = new ArrayList<>();
 
-        if (!boardList.isEmpty())
-            filterList = boardList.stream().filter(i -> i.getTitle().contains(keyword))
-                    .filter(i -> i.getMemberId().contains(created))
-                    .toList();
-
-        return filterList;
+    if (!boardList.isEmpty()) {
+      filterList = boardList.stream().filter(i -> i.getTitle().contains(keyword))
+          .filter(i -> i.getMemberId().contains(created))
+          .toList();
     }
 
-    public int registerNewArticle(Board board) {
-        return boardDao.registerNewArticle(board);
-    }
+    return filterList;
+  }
 
-    public Board loadArticleDetail(int boardId) {
-        return boardDao.loadArticleDetail(boardId);
-    }
+  public int registerNewArticle(Board board) {
+    return boardDao.registerNewArticle(board);
+  }
 
-    public int deleteArticle(int boardId) {
-        return boardDao.deleteArticle(boardId);
-    }
+  public Board loadArticleDetail(int boardId) {
+    return boardDao.loadArticleDetail(boardId);
+  }
 
-    public String findArticleCreated(int boardId) {
-        return boardDao.findArticleCreated(boardId);
-    }
+  public int deleteArticle(int boardId) {
+    return boardDao.deleteArticle(boardId);
+  }
 
-    public int findArticleCurrentGood(int boardId) {
-        return boardDao.findArticleCurrentGood(boardId);
-    }
+  public String findArticleCreated(int boardId) {
+    return boardDao.findArticleCreated(boardId);
+  }
 
-    public int countArticleGood(int boardId, int good) {
-        return boardDao.countArticleGood(boardId, good);
-    }
+  public int findArticleCurrentGood(int boardId) {
+    return boardDao.findArticleCurrentGood(boardId);
+  }
+
+  public int countArticleGood(int boardId, int good) {
+    return boardDao.countArticleGood(boardId, good);
+  }
+
+  public String loadArticleAuthor(int boardId) {
+    return boardDao.loadArticleAuthor(boardId);
+  }
+
+  public int modifyArticleData(Board board) {
+    return boardDao.modifyArticleData(board);
+  }
 }
