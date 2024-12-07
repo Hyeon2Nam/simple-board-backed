@@ -4,5 +4,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface MemberDao {
-    public String testConnection();
+    String testConnection();
+    String findMember(String memberId);
 }

@@ -12,4 +12,10 @@ public class MemberService {
     public String testConnection() {
         return memberDao.testConnection();
     }
+
+    public String findMember(String memberId){
+        return memberDao.findMember(memberId);
+    }
+
 }
+
