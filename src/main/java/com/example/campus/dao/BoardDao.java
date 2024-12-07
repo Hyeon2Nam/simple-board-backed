@@ -8,17 +8,22 @@ import java.util.List;
 
 @Mapper
 public interface BoardDao {
-    List<Board> loadArticleList();
 
-    int registerNewArticle(Board board);
+  List<Board> loadArticleList();
 
-    Board loadArticleDetail(int boardId);
+  int registerNewArticle(Board board);
 
-    int deleteArticle(int boardId);
+  Board loadArticleDetail(int boardId);
 
-    String findArticleCreated(int boardId);
+  int deleteArticle(int boardId);
 
-    int findArticleCurrentGood(int boardId);
+  String findArticleCreated(int boardId);
 
-    int countArticleGood(int boardId, int good);
+  int findArticleCurrentGood(int boardId);
+
+  int countArticleGood(int boardId, int good);
+
+  String loadArticleAuthor(int boardId);
+
+  int modifyArticleData(Board board);
 }

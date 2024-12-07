@@ -17,5 +17,6 @@ public class MemberService {
         return memberDao.findMember(memberId);
     }
 
+
 }
 
